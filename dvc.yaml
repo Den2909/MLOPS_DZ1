@@ -1,0 +1,15 @@
+stages:
+  get_features:
+    cmd: python3 scripts/data_processing/get_features.py datasets/train.csv
+    deps:
+    - datasets/train.csv
+    - scripts/data_processing/get_features.py
+    outs:
+    - datasets/stage1
+  prepared_features:
+    cmd: python3 scripts/data_processing/prepared_features.py datasets/stage1/train.csv
+    deps:
+    - datasets/stage1/train.csv
+    - scripts/data_processing/prepared_features.py
+    outs:
+    - datasets/stage2

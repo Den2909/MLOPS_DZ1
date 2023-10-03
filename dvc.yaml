@@ -32,3 +32,13 @@ stages:
     - train.seed
     outs:
     - models/model.pkl
+  evaluate:
+    cmd: python3 scripts/model_learning/evaluate.py datasets/stage3/test.csv models/model.pkl
+    deps:
+    - datasets/stage3/test.csv
+    - models/model.pkl
+    - scripts/model_learning/evaluate.py
+    metrics:
+      - evaluate/score.json:
+          cache: false
+ 

@@ -13,3 +13,12 @@ stages:
     - scripts/data_processing/prepared_features.py
     outs:
     - datasets/stage2
+  split:
+    cmd: python scripts/data_processing/train_test_split.py datasets/stage2/train.csv
+    deps:
+    - datasets/stage2/train.csv
+    - scripts/data_processing/train_test_split.py
+    params:
+    - split.split_ratio
+    outs:
+    - datasets/stage3

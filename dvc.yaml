@@ -14,7 +14,7 @@ stages:
     outs:
     - datasets/stage2
   split:
-    cmd: python scripts/data_processing/train_test_split.py datasets/stage2/train.csv
+    cmd: python3 scripts/data_processing/train_test_split.py datasets/stage2/train.csv
     deps:
     - datasets/stage2/train.csv
     - scripts/data_processing/train_test_split.py
@@ -22,3 +22,13 @@ stages:
     - split.split_ratio
     outs:
     - datasets/stage3
+  train:
+    cmd: python3 scripts/model_learning/dt.py datasets/stage3/train.csv model.pkl
+    deps:
+    - datasets/stage3/train.csv
+    - scripts/model_learning/dt.py
+    params:
+    - train.max_depth
+    - train.seed
+    outs:
+    - models/model.pkl
